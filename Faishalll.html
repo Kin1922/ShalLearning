@@ -170,6 +170,10 @@
 </head>
 <body>
 
+<audio id="bgMusic" loop>
+    <source src="semua-tentang-kita.mp3" type="audio/mpeg">
+</audio>
+
 <div class="container">
     <div class="progress-bar"><div class="progress" id="progress"></div></div>
 
@@ -201,7 +205,7 @@
         <p>Terima kasih buat setiap <span class="highlight">brainstorming</span> yang panas tapi asik, nongkorng depan pt ngobrol,bercanda,makan mendoan,dan saling kasih saran dan kritik, dan buat kekompakan tim yang selalu bisa nyelesein masalah serumit apa pun. Kalian adalah aset terbaik yang pernah Faishal temui.</p>
         <div class="btn-container">
             <button class="btn btn-back" onclick="nextStep(1)">Back</button>
-            <button class="btn" onclick="nextStep(3)">Klik Sini Hehe ✌</button>
+            <button class="btn" onclick="nextStep(3)">Klik Sini Hehe✌</button>
         </div>
     </div>
 
@@ -220,8 +224,8 @@
         <p>Hari ini Faishal resmi <span class="highlight">disconnect</span> dari tugas harian, tapi Faishal harap persahabatan kita tetep sinkron di luar sana.</p>
         <p>Sukses terus buat Teman-teman Sales Dan KSR Faishal, jangan lupa istirahat, dan sampai ketemu di level selanjutnya! Cheers to the best team ever! 🍻</p>
         <div class="btn-container">
-            <button class="btn btn-back" onclick="nextStep(3)">Ulangi</button>
-            <button class="btn" onclick="location.href='https://wa.me/6283817520131'">Say Hi di WhatsApp</button>
+            <button class="btn btn-back" onclick="nextStep(3)">Back</button>
+            <button class="btn" onclick="location.href='https://wa.me/6283817520131'">Test Hi di WhatsApp</button>
         </div>
     </div>
 </div>
@@ -232,7 +236,14 @@
 
 <script>
     const totalSteps = 5;
+    const bgMusic = document.getElementById('bgMusic');
+
     function nextStep(step) {
+        // Memutar musik saat tombol START ditekan (pindah ke step 1)
+        if (step === 1 && bgMusic.paused) {
+            bgMusic.play().catch(error => console.log("Gagal memutar audio:", error));
+        }
+
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         document.getElementById('step' + step).classList.add('active');
         const progressPercent = ((step + 1) / totalSteps) * 100;
